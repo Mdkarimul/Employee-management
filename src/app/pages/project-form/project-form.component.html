@@ -1,0 +1,95 @@
+<div class="container p-5 my-5">
+  <div class="row">
+    <div class="col-md-9 p-3 shadow-sm p-5">
+      <h4>Projects</h4>
+      <!-- Project Form -->
+      <form class="mb-4" [formGroup]="projectForm">
+        <div class="mb-0 my-5">
+          <label for="projectId"  class="form-label">Project id</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="projectId"
+            formControlName="projectId"
+          />
+        </div>
+        <div class="mb-0 my-5">
+          <label for="projectName" class="form-label">Project name</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="projectName"
+            formControlName="projectName"
+          />
+        </div>
+
+        <div class="mb-0 my-5">
+            <label for="clientName" class="form-label">Client name</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="clientName"
+              formControlName="clientName"
+            />
+          </div>
+
+        <div class="mb-0 my-5">
+          <label for="startDate" class="form-label">Start date</label>
+          <input
+            type="date"
+            class="form-control form-control-lg"
+            id="startDate"
+            formControlName="startDate"
+          />
+        </div>
+        <div class="mb-1 my-5">
+          <label for="leadByEmpId" class="form-label"
+            >Lead By Employee ID</label
+          >
+          <input
+            type="number"
+            class="form-control form-control-lg"
+            id="leadByEmpId"
+            formControlName="leadByEmpId"
+          />
+        </div>
+
+        <div class="mb-0 my-5">
+          <label for="contactPerson" class="form-label">Contact person</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="contactPerson"
+            formControlName="contactPerson"
+          />
+        </div>
+        <div class="mb-0 my-5">
+          <label for="contactNo" class="form-label">Contact no</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="contactNo"
+            formControlName="contactNo"
+          />
+        </div>
+
+        <div class="mb-0 my-5">
+            <label for="emailId" class="form-label">Email id</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="emailId"
+              formControlName="emailId"
+            />
+          </div>
+
+        <!-- <button type="submit" class="btn btn-primary mt-3">Submit</button> -->
+        <button type="submit" class="my-3 btn btn-lg btn-primary">
+          <span class="mx-3">Add Now</span>
+        </button>
+      </form>
+    </div>
+
+    <div class="col-md-3"></div>
+  </div>
+</div>
