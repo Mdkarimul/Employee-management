@@ -2,6 +2,7 @@ import { ApplicationConfig, Injectable, provideZoneChangeDetection } from '@angu
 import { provideRouter, RouterStateSnapshot, TitleStrategy, withComponentInputBinding, withRouterConfig } from '@angular/router';
 import { routes } from './app.routes';
 import { Title } from '@angular/platform-browser';
+import { provideHttpClient } from '@angular/common/http';
 
 
 
@@ -28,7 +29,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes,withComponentInputBinding(),withRouterConfig({paramsInheritanceStrategy:'always'})),
     {
       provide:TitleStrategy,useClass:TemplatePageTitleStrategy
-    }
+    },
+    provideHttpClient()
 
   ],
 };

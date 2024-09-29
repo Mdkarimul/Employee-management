@@ -1,7 +1,20 @@
 <div class="container p-5">
   <div class="row" style="height: 80vh">
     <div class="col-md-6">
-      <h4><i class="fa fa-plus mx-2" aria-hidden="true"></i>Employee</h4>
+      <div class="container d-flex justify-content-between">
+        <h4>Add Employee</h4>
+        @if(!isFormVisible()){
+        <button class="btn btn-success" (click)="isFormVisible.set(true)">
+          <i class="fa fa-plus mx-2" aria-hidden="true"></i>Add
+        </button>
+        }@else {
+        <button class="btn btn-success" (click)="isFormVisible.set(false)">
+          <i class="fa fa-plus mx-2" aria-hidden="true"></i>Close
+        </button>
+        }
+      </div>
+
+      @if(isFormVisible()){
       <div class="mb-3 my-5">
         <label for="employee-name" class="form-label">Employee name</label>
         <input
@@ -62,38 +75,81 @@
         <div class="col-md-6">
           <div class="mb-3">
             <div class="mb-3">
-              <label for="employee-department" class="form-label"
-                >Department</label
+              <label for="parent-department" class="form-label"
+                >Parent Department</label
               >
-              <input
-                type="text"
-                class="form-control form-control-lg"
-                id="employee-department"
-              />
+              <select
+                [(ngModel)]="parentDeparmentId"
+                (change)="onParentDepartmentChange()"
+                class="form-select form-select-lg fs-6 mb-3"
+                name="parent-department"
+                id="parent-department"
+                aria-label="Large select example"
+              >
+                <option selected>Select department</option>
+
+                @for(item of parentDepartmentList();track $index){
+                <option [value]="item.departmentId">
+                  {{ item.departmentName }}
+                </option>
+                }
+              </select>
             </div>
           </div>
         </div>
         <div class="col-md-6">
-          <div class="mb-3">
-            <label for="employee-role" class="form-label">Role</label>
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              id="employee-role"
-            />
-          </div>
+            <div class="mb-3">
+                <label for="parent-department" class="form-label"
+                  >Child Department</label
+                >
+                <select
+                  [(ngModel)]="childDepartmentId"
+                  (change)="onChildDepartmentChange()"
+                  class="form-select form-select-lg fs-6 mb-3"
+                  name="child-department"
+                  id="child-department"
+                  aria-label="Large select example"
+                >
+                  <option selected>Select department</option>
+  
+                  @for(item of childDepartmentList();track $index){
+                  <option [value]="item.childDeptId">
+                    {{ item.departmentName }}
+                  </option>
+                  }
+                </select>
+              </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="mb-3">
+          <label for="employee-role" class="form-label">Role</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            id="employee-role"
+          />
         </div>
       </div>
 
       <button class="my-3 btn btn-lg btn-primary">
         <span class="mx-3">Add Now</span>
       </button>
+      }
     </div>
     <div class="col-md-6">
-      <h4 class="mb-5 p-3"><i class="fa fa-male me-2" aria-hidden="true"></i>Show employees</h4>
-      <div class="container-fluid  my-3 p-0 m-0 overflow-y-scroll overflow-x-hidden" style="height: 500px">
-        <table class="table table-success table-hover table-striped-columns p-0 m-0">
-          <tr class="bg-dark text-light ">
+      <h4 class="mb-5 p-3">
+        <i class="fa fa-male me-2" aria-hidden="true"></i>Show employees
+      </h4>
+      <div
+        class="container-fluid my-3 p-0 m-0 overflow-y-scroll overflow-x-hidden"
+        style="height: 500px"
+      >
+        <table
+          class="table table-success table-hover table-striped-columns p-0 m-0"
+        >
+          <tr class="bg-dark text-light">
             <th class="p-3">Name</th>
             <th>Email</th>
             <th>Department</th>
