@@ -4,7 +4,7 @@
       <h4>Projects</h4>
       <!-- Project Form -->
       <form class="mb-4" [formGroup]="projectForm">
-        <div class="mb-0 my-5">
+        <!-- <div class="mb-0 my-5">
           <label for="projectId"  class="form-label">Project id</label>
           <input
             type="text"
@@ -12,7 +12,7 @@
             id="projectId"
             formControlName="projectId"
           />
-        </div>
+        </div> -->
         <div class="mb-0 my-5">
           <label for="projectName" class="form-label">Project name</label>
           <input
@@ -33,6 +33,16 @@
             />
           </div>
 
+          <div class="mb-0 my-5">
+            <label for="emailId" class="form-label">Email id</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="emailId"
+              formControlName="emailId"
+            />
+          </div>
+
         <div class="mb-0 my-5">
           <label for="startDate" class="form-label">Start date</label>
           <input
@@ -46,12 +56,12 @@
           <label for="leadByEmpId" class="form-label"
             >Lead By Employee ID</label
           >
-          <input
-            type="number"
-            class="form-control form-control-lg"
-            id="leadByEmpId"
-            formControlName="leadByEmpId"
-          />
+         <select name="" class="form-select-lg form-select" id="leadByEmpId" formControlName="leadByEmpId"  >
+          <option selected="selected">Select</option>
+          @for (item of empList$ | async; track $index) {
+            <option [value]="item.employeeId">{{item.employeeName}}</option>
+          }
+         </select>
         </div>
 
         <div class="mb-0 my-5">
@@ -73,20 +83,18 @@
           />
         </div>
 
-        <div class="mb-0 my-5">
-            <label for="emailId" class="form-label">Email id</label>
-            <input
-              type="text"
-              class="form-control form-control-lg"
-              id="emailId"
-              formControlName="emailId"
-            />
-          </div>
-
+       
         <!-- <button type="submit" class="btn btn-primary mt-3">Submit</button> -->
-        <button type="submit" class="my-3 btn btn-lg btn-primary">
-          <span class="mx-3">Add Now</span>
-        </button>
+         @if(projectForm.controls['projectId'].value==0){
+          <button type="button" (click)="onSaveProject()" class="my-3 btn btn-lg btn-primary">
+            <span class="mx-3">Save project</span>
+          </button>
+         }@else {
+          <button type="button" (click)="onUpdateProject()" class="my-3 btn btn-lg btn-success">
+            <span class="mx-3">Update Project</span>
+          </button>
+         }
+     
       </form>
     </div>
 

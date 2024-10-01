@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiResponse } from '../model/interface/master';
+import { IApiResponse, Iproject, IProjectEmployer } from '../model/interface/master';
 import { Observable } from 'rxjs';
 import { IsActiveMatchOptions } from '@angular/router';
 import { Employee } from '../model/class/Employee';
@@ -38,8 +38,41 @@ export class MasterService {
 
   updateEmployee(empObj:Employee):Observable<Employee>{
     return this.http.put<Employee>(this.apiUrl+"/UpdateEmployee/"+empObj.employeeId,empObj);
-
   }
+
+  saveProject(data:Employee):Observable<Iproject>{
+    return this.http.post<Iproject>(`${this.apiUrl}/CreateProject`,data);
+   }
   
+   getAllProject():Observable<Iproject[]>{
+    return this.http.get<Iproject[]>(`${this.apiUrl}/GetAllProjects`);
+   }
+   deleteProject(id:number) {
+return this.http.delete(`${this.apiUrl}/DeleteProject/${id}`);
+   }
+
+   getProjectById(id:number):Observable<Iproject>{
+    return this.http.get<Iproject>(`${this.apiUrl}/GetProject/${id}`)
+   }
+
+   updateProject(data:Iproject):Observable<Iproject>{
+    return this.http.put<Iproject>(`${this.apiUrl}/UpdateProject/${data.projectId}`,data);
+   }
+
+   getAllProjectEmployee():Observable<IProjectEmployer[]>{
+    return this.http.get<IProjectEmployer[]>(`${this.apiUrl}/GetAllProjectEmployees`);
+   }
+
+   updateProjectEmployee(data:IProjectEmployer):Observable<IProjectEmployer>{
+     return this.http.put<IProjectEmployer>(this.apiUrl+"/UpdateProjectEmployees/"+data.ProjectId,data);
+   }
+   deleteProjectEmployee(id:number){
+  return this.http.delete(`${this.apiUrl}/DeleteProjectEmployee/${id}}`);
+   }
+   createProjectEmployee(data:IProjectEmployer):Observable<IProjectEmployer>{
+   return this.http.post<IProjectEmployer>(this.apiUrl+"/CreateProjectEmployee",data);
+   }
+
+
 
 }

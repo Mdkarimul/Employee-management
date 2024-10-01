@@ -1,10 +1,9 @@
 <div class="container p-5 my-5">
   <div class="row" style="height:auto;">
-    <div class="col-md-4">
+    <div class="col-md-2">
        
         <div class="row">
-            <div class="col-md-6"> <h4>Projects</h4></div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <button  routerLink="/new-project/0" class="btn btn-primary">Add project</button>
             </div>
         </div>
@@ -12,16 +11,16 @@
     </div>
 
 
-    <div class="col-md-8">
+    <div class="col-md-10">
 
    <!-- Project Table -->
    <h4 class="mb-4">Project list</h4>
    <table class="table ">
      <thead>
-       <tr>
-         <th>Project ID</th>
-         <th>Project Name</th>
-         <th>Client Name</th>
+       <tr class="p-5">
+         <th >Project ID</th>
+         <th >Project Name</th>
+         <th >Client Name</th>
          <th>Start Date</th>
          <th>Lead By Employee</th>
          <th>Actions</th>
@@ -29,17 +28,20 @@
      </thead>
      <tbody>
        <!-- Data rows go here -->
+       @for (item of projectList; track $index) {
         <tr>
-            <td>102</td>
-            <td>Web app</td>
-            <td>John sir</td>
-            <td>23-10-24</td>
-            <td>Md Farik</td>
-            <td>
-                <button class="btn"><i class="fa fa-edit"></i></button
-                    ><button  class="btn"><i class="fa fa-trash"></i></button> 
-            </td>
-        </tr>
+          <td>{{item.projectId}}</td>
+          <td>{{item.projectName}}</td>
+          <td>{{item.clientName}}</td>
+          <td>{{item.startDate}}</td>
+          <td>{{item.leadByEmpId}}</td>
+          <td>
+              <button (click)="onEdit(item.projectId)" class="btn"><i class="fa fa-edit"></i></button
+                  ><button (click)="onDelete(item.projectId)"  class="btn"><i class="fa fa-trash"></i></button> 
+          </td>
+      </tr>
+       } 
+  
      </tbody>
    </table>
 
