@@ -35,5 +35,15 @@ export interface IProjectEmployer {
     empId:number,
     assignedDate:string,
     role:string,
-    isActive:string
+    isActive:string,
+   
+}
+
+export interface GetDashboard {
+    
+        totalEmployee: 0,
+        totalProject: 0,
+        recentEmployee: string,
+        recentProjects: string
+      
 }

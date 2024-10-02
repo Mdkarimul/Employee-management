@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { IApiResponse, Iproject, IProjectEmployer } from '../model/interface/master';
+import { GetDashboard, IApiResponse, Iproject, IProjectEmployer } from '../model/interface/master';
 import { Observable } from 'rxjs';
 import { IsActiveMatchOptions } from '@angular/router';
 import { Employee } from '../model/class/Employee';
@@ -69,8 +69,12 @@ return this.http.delete(`${this.apiUrl}/DeleteProject/${id}`);
    deleteProjectEmployee(id:number){
   return this.http.delete(`${this.apiUrl}/DeleteProjectEmployee/${id}}`);
    }
-   createProjectEmployee(data:IProjectEmployer):Observable<IProjectEmployer>{
-   return this.http.post<IProjectEmployer>(this.apiUrl+"/CreateProjectEmployee",data);
+   createProjectEmployee(data:Iproject):Observable<Iproject>{
+   return this.http.post<Iproject>(this.apiUrl+"/CreateProjectEmployee",data);
+   }
+
+   getDashboardData():Observable<GetDashboard> {
+    return this.http.get<GetDashboard>(`${this.apiUrl}/GetDashboard`);
    }
 
 

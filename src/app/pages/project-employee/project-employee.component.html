@@ -20,6 +20,19 @@
             </thead>
             <tbody>
               <!-- show our data -->
+               @for (item of projectEmployeeList(); track $index) {
+                <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{item.ProjectId}}</td>
+                  <td>{{item.empId}}</td>
+                  <td>{{item.assignedDate}}</td>
+                  <td>{{item.role}}</td>
+                  <td>
+                    <button (click)="onEdit(item.ProjectId)" class="btn"><i class="fa fa-edit"></i></button
+                      ><button (click)="onDelete(item.ProjectId)"  class="btn"><i class="fa fa-trash"></i></button> 
+                  </td>
+                </tr>
+               }
             </tbody>
           </table>
         </div>
@@ -31,61 +44,76 @@
         <div class="card-header bg-warning">
           <h5>Add new project employee</h5>
         </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="project-id" class="form-label"
-                  >Project id</label
-                >
-                <input
-                  type="text"
-                  class="form-control form-control-lg"
-                  name="project-id"
-                  id="project-id"
-                 
-                />
-              </div>
-            </div>
-            <div class="col-md-6">
+        <form [formGroup]="form" action="">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
                 <div class="mb-3">
-                    <label for="employee-id" class="form-label"
-                      >Employee Id</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control form-control-lg"
-                      name="employee-id"
-                      id="employee-id"
-                     
-                    />
-                  </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6">
-              <div class="mb-3">
-                <label for="assign-date" class="form-label"
-                  >Assignment Date</label
-                >
-                <input
-                  type="date"
-                  class="form-control form-control-lg"
-                  name="assign-date"
-                  id="assign-date"
+                  <label for="project-id" class="form-label"
+                    >Project id</label
+                  >
+                  <select name="" formControlName="projectId" class="form-select" id="project-id">
+                    <option value="" selected>Select</option>
+                    @for (item of projectList$ |async; track $index) {
+                      <option [value]="item.projectId">{{item.projectName}}</option>
+                    }
+                  </select>
+             
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="mb-3">
+                      <label for="employee-id" class="form-label"
+                        >Employee Id</label
+                      >
+                      <select name="" class="form-select" formControlName="empId" id="employee-id">
+                        <option value="" selected>Select</option>
+                        @for (item of empList$ |async; track $index) {
+                          <option [value]="item.employeeId">{{item.employeeName}}</option>
+                        }
+                      </select>
                  
-                />
+                    </div>
               </div>
             </div>
-            <div class="col-md-6">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="assign-date" class="form-label"
+                    >Assignment Date</label
+                  >
+                  <input
+                    type="date"
+                    class="form-control form-control-lg" formControlName="assignedDate"
+                    name="assign-date"
+                    id="assign-date"
+                   
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                  <div class="mb-3">
+                      <label for="role" class="form-label"
+                        >Role</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control form-control-lg" formControlName="role"
+                        name="role"
+                        id="role"
+                       
+                      />
+                    </div>
+              </div>
+
+              <div class="col-md-6">
                 <div class="mb-3">
                     <label for="role" class="form-label"
                       >Role</label
                     >
                     <input
-                      type="text"
-                      class="form-control form-control-lg"
+                      type="checkbox"
+                      class="" formControlName="isActive"
                       name="role"
                       id="role"
                      
@@ -93,14 +121,15 @@
                   </div>
             </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <button class="btn btn-primary " type="button">Submit</button>
-                </div>
+              <div class="row">
+                  <div class="col-12">
+                      <button class="btn btn-primary " (click)="onSave()" type="button">Submit</button>
+                  </div>
+              </div>
             </div>
+  
           </div>
-
-        </div>
+        </form>
         <div class="card-footer"></div>
       </div>
     </div>
